@@ -1,0 +1,17 @@
+short_description
+ingredient
+useage
+dosage
+adverseEffect
+careful
+FAQ: Tách theo dấu |
+ rate: tách theo || và tách câu hỏi trả lời theo |
+QA: Tương tự rate
+
+metadata: 
+name
+type
+specification
+assign
+preservation
+price

@@ -1,0 +1,5 @@
+src/craw_data/*
+models/*
+*.pyc
+src/test/*
+.env

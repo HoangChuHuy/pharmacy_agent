@@ -1,0 +1,20 @@
+CREATE TABLE medicine_detailt (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) COMMENT 'Tên thuốc, là khóa chính và khóa ngoại liên kết với bảng products.',
+    type TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci COMMENT 'Loại danh mục thuốc đó',
+    specification TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci COMMENT "Cách đóng gói thuốc có thể là túp vỉ viên nén",
+    assign TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci COMMENT "Chỉ định dành cho những trường hợp nào",
+    short_description TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci COMMENT "Mô tả ngắn về loại thuốc",
+    ingredient TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci COMMENT 'Thành phần hoạt chất chính của thuốc.',
+    usesage TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci COMMENT 'Công dụng hoặc chỉ định của thuốc.',
+    dosage TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci COMMENT 'Liều dùng được khuyến nghị.',
+    adverseEffect TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci COMMENT 'Tác dụng phụ có thể xảy ra khi dùng thuốc.',
+    careful TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci COMMENT 'Các lưu ý và thận trọng khi sử dụng thuốc.',
+    preservation TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci COMMENT 'Cách bảo quản thuốc.',
+    price TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci COMMENT 'Giá bán của thuốc.',
+    image_url TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci COMMENT 'URL hình ảnh minh họa cho thuốc.',
+    note TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci COMMENT "Lưu ý khi sử dụng thuốc",
+    FAQ TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci COMMENT "Các câu hỏi thường gặp",
+    rate TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci COMMENT "Đánh giá về sản phẩm",
+    QA MEDIUMTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci COMMENT "Các bình luận về sản phẩm"
+)
