@@ -1,0 +1,41 @@
+version: "3.8"
+services:
+  neo4j:
+    image: neo4j:latest  
+    ports:
+      - 7474:7474
+      - 7687:7687
+    restart: unless-stopped
+    environment:
+      - NEO4J_AUTH=neo4j/password
+    volumes:
+      - ../neo4j/data:/data
+      - ../neo4j/conf:/conf
+      - ../neo4j/logs:/logs
+      - ../neo4j/plugins:/plugins
+    
+    mysql:
+      platform: linux/x86_64
+      image: mysql:5.7.44
+      deploy:
+        replicas: 1
+        restart_policy:
+          condition: on-failure
+      environment:
+        - MYSQL_ROOT_PASSWORD=test
+        - MYSQL_ROOT_HOST=%
+        - MYSQL_USER=admin
+        - MYSQL_PASSWORD=test
+        - MYSQL_DATABASE=medicine
+      ports:
+        - "3306:3306"
+      healthcheck:
+        test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-p$MYSQL_ROOT_PASSWORD"]
+        interval: 5s
+        retries: 10
+        start_period: 10s
+
+    qdrant:
+      image: qdrant/qdrant
+      ports:
+        - "6333:6333"

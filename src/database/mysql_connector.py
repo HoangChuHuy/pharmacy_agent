@@ -90,9 +90,24 @@ class MySQLConnector():
             logger.error(f"Error when query to database: {err}")
             return None
 
+    
+    def update_medicine(self, id:str, assign:str):
+        try:
+            query = f"""
+                INSERT INTO medicine_detailt (id, assign) 
+                VALUES (%s, %s)
+                ON DUPLICATE KEY UPDATE
+                assign = VALUES(assign);
+                """
+            mycursor = self.mydb.cursor()
+            mycursor.execute(query, (id, assign))
+            self.mydb.commit()
+        except mysql.connector.Error as err:
+            logger.error(f"Error when insert to table: {err}, {id}, {assign}")
+
     def insert_to_medicine_detail(self, detail_data):
         try:
-            query = f"INSERT INTO  medicine_detailt (name, type, specification, assign, short_description, \
+            query = f"INSERT INTO medicine_detailt (name, type, specification, assign, short_description, \
                 ingredient, usesage, dosage, adverseEffect, careful, preservation, price, image_url, note, FAQ, rate, QA) \
             VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s);"
             mycursor = self.mydb.cursor()
