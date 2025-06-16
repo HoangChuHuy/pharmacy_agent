@@ -6,6 +6,8 @@ import json
 from tqdm import tqdm
 from src.database.qdrant import QdrantVectorStore
 from langchain_core.documents import Document
+import argparse
+from src.database.neo4j_graph_db import Neo4j
 
 
 connector = MySQLConnector()
@@ -81,14 +83,14 @@ def split_document():
             connector.insert_to_chunks(chunks)
 
 
-def embedding_and_insert_qdrand():
+def embedding_and_insert_qdrand(start_idx:int = 0):
     data_length = connector.custom_query("SELECT COUNT(*) FROM chunks",cursor_template=MySQLCursorDict)
     data_length = list(data_length[0].values())[0]
     
     qdrant = QdrantVectorStore(QDRANT_COLLECTION)
     qdrant.create_collection()
 
-    for idx in tqdm(range(0 ,data_length, 50)):
+    for idx in tqdm(range(start_idx ,data_length, 50)):
         data = connector.custom_query(f"SELECT * FROM chunks LIMIT {idx}, 50",
                                       cursor_template=MySQLCursorDict)
 
@@ -98,5 +100,22 @@ def embedding_and_insert_qdrand():
         qdrant.add_documents(docs)
 
 if __name__ == "__main__":
-    # split_document()
-    embedding_and_insert_qdrand()
+    parser = argparse.ArgumentParser(description="Script xử lý dữ liệu với tuỳ chọn.")
+
+    parser.add_argument('--is_spliting_chunks', action='store_true',
+                        help='Chia dữ liệu thành chunks hay không (bool).')
+
+    parser.add_argument('--embedding_index', type=int, default=0,
+                        help='Vị trí index hiện tại trong embedding (int).')
+
+    parser.add_argument('--is_insert_neo4j', action='store_true',
+                        help='Có insert vào Neo4j hay không (bool).')
+
+    args = parser.parse_args()
+
+    if args.is_spliting_chunks:
+        split_document()
+        embedding_and_insert_qdrand(start_idx=  args.embedding_index)
+    if args.is_insert_neo4j:
+        connector = Neo4j()
+        connector.insert_to_db()

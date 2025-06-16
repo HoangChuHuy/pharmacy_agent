@@ -3,3 +3,4 @@ models/*
 *.pyc
 src/test/*
 .env
+src/test/*
