@@ -97,23 +97,6 @@ def embedding_and_insert_qdrand():
                         for medicine in data]
         qdrant.add_documents(docs)
 
-
-def insert_in_jsonl(filepath:str, collection_name:str):
-
-    qdrant = QdrantVectorStore(collection_name)
-    qdrant.create_collection()
-
-    with open(filepath, 'r', encoding='utf-8') as f:
-        file_size = len(f.readlines())
-        
-        
-    with open(filepath, 'r', encoding='utf-8') as f:
-        for line in tqdm(f, total=file_size):
-            item = json.loads(line)
-            qdrant.insert_points(item.get("text", ""), json.loads(item.get("metadata", {})), item.get("embedding", []))
-
-
 if __name__ == "__main__":
     # split_document()
-    # embedding_and_insert_qdrand()
-    insert_in_jsonl("embeddings_new.jsonl", collection_name="medicine_1")
+    embedding_and_insert_qdrand()

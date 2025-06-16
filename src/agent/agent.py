@@ -243,7 +243,3 @@ if __name__ == "__main__":
             logger.info("\n✅ [answer]:\n {}", answer1)
         else:
             break
-
-    # question2 = "Lỗi đó có liên quan tới timeout không?"
-    # answer2 = rag_agent.run(question2)
-    # print("\n✅ [Lần 2]:\n", answer2)
