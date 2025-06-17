@@ -50,6 +50,9 @@ Create a `.env` file in the root directory and add the following environment var
 
 ```
 GOOGLE_API_KEY="YOUR_GOOGLE_API_KEY"
+EMBEDDING_MODEL="Sentence Transformer Model"
+QDRANT_COLLECTION="Qdrant collection"
+
 ```
 
 ### 3. Install Dependencies
@@ -68,11 +71,32 @@ docker-compose -f docker/docker-compose.yml up -d
 
 **Note**: The `docker-compose.yml` file in the `docker` directory might have some indentation issues. Please make sure to fix them before running the command.
 
-### 5. Run the Application
+### 5. Run process data
+
+Import data to sql from this file: ```(updating)```
+
+```bash
+
+python src/utils/embedding_medicine.py -h
+usage: embedding_medicine.py [-h] [--is_spliting_chunks] [--embedding_index EMBEDDING_INDEX] [--is_insert_neo4j]
+
+Script xử lý dữ liệu với tuỳ chọn.
+
+options:
+  -h, --help            show this help message and exit
+  --is_spliting_chunks  Chia dữ liệu thành chunks hay không (bool).
+  --embedding_index EMBEDDING_INDEX
+                        Vị trí index hiện tại trong embedding (int).
+  --is_insert_neo4j     Có insert vào Neo4j hay không (bool).
+
+```
+
+### 6. Run the Application
 
 ```bash
 python main.py
 ```
+
 
 This will start the Gradio interface at `http://localhost:8080`.
 

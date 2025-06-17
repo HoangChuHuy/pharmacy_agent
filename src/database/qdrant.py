@@ -46,7 +46,7 @@ class QdrantVectorStore:
                 self.model.save(path)
                 self.model = SentenceTransformer(path, trust_remote_code=True)
 
-    def get_embedding(self, sentences:Union[List[str], str]="", emb_type: Literal['api', 'local']= 'api'):
+    def get_embedding(self, sentences:Union[List[str], str]="", emb_type: Literal['api', 'local']= 'local'):
         if emb_type == "local":
             embeddings = self.model.encode(sentences)
             return embeddings.tolist()
