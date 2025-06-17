@@ -4,3 +4,4 @@ models/*
 src/test/*
 .env
 src/test/*
+.gradio
