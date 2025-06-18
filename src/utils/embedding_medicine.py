@@ -8,7 +8,7 @@ from src.database.qdrant import QdrantVectorStore
 from langchain_core.documents import Document
 import argparse
 from src.database.neo4j_graph_db import Neo4j
-
+import pandas as pd
 
 connector = MySQLConnector()
 
@@ -105,6 +105,9 @@ if __name__ == "__main__":
     parser.add_argument('--is_spliting_chunks', action='store_true',
                         help='Chia dữ liệu thành chunks hay không (bool).')
 
+    parser.add_argument('--csv_file', type=str, default="",
+                    help='Đường dẫn đến file dữ liệu để insert vào trong mysql')
+
     parser.add_argument('--embedding_index', type=int, default=0,
                         help='Vị trí index hiện tại trong embedding (int).')
 
@@ -113,6 +116,11 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
+    if args.csv_file:
+        df = pd.read_csv(args.csv_file).fillna("")
+        for data in tqdm(df.values):
+            connector.insert_to_medicine_detail(detail_data=data[1:].tolist())    
+    
     if args.is_spliting_chunks:
         split_document()
         embedding_and_insert_qdrand(start_idx=  args.embedding_index)

@@ -73,21 +73,23 @@ docker-compose -f docker/docker-compose.yml up -d
 
 ### 5. Run process data
 
-Import data to sql from this file: ```(updating)```
+Import data to sql from this file: [medicine.csv](https://drive.google.com/file/d/1t3XVyYivkgpZzSFs8kKh9PDmjDojqf6Z/view?usp=sharing)
 
 ```bash
 
-python src/utils/embedding_medicine.py -h
-usage: embedding_medicine.py [-h] [--is_spliting_chunks] [--embedding_index EMBEDDING_INDEX] [--is_insert_neo4j]
+usage: embedding_medicine.py [-h] [--is_spliting_chunks] [--csv_file CSV_FILE] [--embedding_index EMBEDDING_INDEX]
+                             [--is_insert_neo4j]
 
 Script xử lý dữ liệu với tuỳ chọn.
 
 options:
   -h, --help            show this help message and exit
   --is_spliting_chunks  Chia dữ liệu thành chunks hay không (bool).
+  --csv_file CSV_FILE   Đường dẫn đến file dữ liệu để insert vào trong mysql
   --embedding_index EMBEDDING_INDEX
                         Vị trí index hiện tại trong embedding (int).
   --is_insert_neo4j     Có insert vào Neo4j hay không (bool).
+
 
 ```
 

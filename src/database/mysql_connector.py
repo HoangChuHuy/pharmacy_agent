@@ -132,7 +132,7 @@ class MySQLConnector():
             query = f"SELECT * FROM {table_name}"
 
             data = pd.read_sql(query, self.mydb)
-            data.to_csv(file_path, index=False)
+            data.to_csv(file_path, index=False, encoding="utf-8-sig")
 
             logger.success("Saved all your transaction in {}", file_path)
         
