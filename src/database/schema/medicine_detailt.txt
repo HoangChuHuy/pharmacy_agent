@@ -1,6 +1,6 @@
 CREATE TABLE medicine_detailt (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) COMMENT 'Tên thuốc, là khóa chính và khóa ngoại liên kết với bảng products.',
+    name TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci COMMENT 'Tên thuốc, là khóa chính và khóa ngoại liên kết với bảng products.',
     type TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci COMMENT 'Loại danh mục thuốc đó',
     specification TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci COMMENT "Cách đóng gói thuốc có thể là túp vỉ viên nén",
     assign TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci COMMENT "Chỉ định dành cho những trường hợp nào",

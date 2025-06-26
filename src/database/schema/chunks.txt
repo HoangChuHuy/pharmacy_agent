@@ -1,5 +1,5 @@
 CREATE TABLE chunks (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    text TEXT NOT NULL,
-    metadata TEXT NOT NULL
+    text TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+    metadata TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
 );

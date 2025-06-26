@@ -117,6 +117,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     if args.csv_file:
+        connector.create_table("medicine_detailt")
         df = pd.read_csv(args.csv_file).fillna("")
         for data in tqdm(df.values):
             connector.insert_to_medicine_detail(detail_data=data[1:].tolist())    
