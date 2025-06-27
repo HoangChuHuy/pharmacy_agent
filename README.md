@@ -59,7 +59,7 @@ QDRANT_COLLECTION="Qdrant collection"
 
 ```bash
 pip install -r requirements.txt
-pip install --upgrade mysql.connector
+pip install --upgrade mysql-connector-python
 ```
 
 ### 4. Start Services

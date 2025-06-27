@@ -9,16 +9,17 @@ from datetime import datetime
 from typing import Union, List
 from pathlib import Path
 import pandas as pd
+from src.config.configs import *
 
 
 load_dotenv()
 
 class MySQLConnector():
-    def __init__(self, host:str =os.getenv("MYSQL_URL"), 
-                 port:int =os.getenv('MYSQL_PORT') ,
-                 user:str = os.getenv("MYSQL_NAME"), 
-                 passwd :str = os.getenv("MYSQL_PASSWORD"),
-                 database:str = os.getenv("MYSQL_DB")):
+    def __init__(self, host:str = MYSQL_URL, 
+                 port:int = MYSQL_PORT,
+                 user:str = MYSQL_NAME, 
+                 passwd :str = MYSQL_PASSWORD,
+                 database:str = MYSQL_DB):
         self.mydb = mysql.connector.connect(
         host=host,
         user=user,
@@ -82,8 +83,11 @@ class MySQLConnector():
 
     def custom_query(self, query:str, data=None, cursor_template = None):
         try:
-            mycursor = self.mydb.cursor(cursor_class=cursor_template)
-            mycursor.execute(query, data)
+            mycursor = self.mydb.cursor()
+            if data is not None:
+                mycursor.execute(query, data)
+            else:
+                mycursor.execute(query)
             myresult = mycursor.fetchall()
             return myresult
         except mysql.connector.Error as err:
